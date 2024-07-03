@@ -1,4 +1,4 @@
-import { Button } from "@shared/ui"
+import Button from "@/components/Button";
 import { useDialogContext } from "./context"
 import { MdClose } from "react-icons/md"
 
