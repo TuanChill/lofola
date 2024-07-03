@@ -37,5 +37,5 @@
 
 .wrapper {
   @apply text-center bg-cover min-h-screen m-0 flex justify-center items-center w-full;
-  background-image: url("../../../assets/images/bg-auth.jpg");
+  background-image: url("../../assets/images/bg-auth.jpg");
 }

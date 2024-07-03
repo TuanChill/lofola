@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useFormik } from "formik";
-import { toast } from "sonner";
 import * as Yup from "yup";
 import localFont from 'next/font/local'
+import { toast } from "sonner";
+import Link from "next/link";
 import { Input } from "@/components/Controls";
 import Button from "@/components/Button";
 import { Toaster } from "@/components/Toast";
-import "../index.css";
-import Link from "next/link";
 import { ROUTES } from "@/container/constrain";
+import "../index.css";
 
 
 const playwireFont = localFont({
@@ -24,22 +22,19 @@ const UserSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  phoneNumber: Yup.string().required("Phone number is required").length(10, "Phone number must be 10 digits"),
   password: Yup.string().required("Password is required").min(8, "Email is too short").max(50, "Email is too long"),
-  rePassword: Yup.string().required("Re-enter password is required").oneOf([Yup.ref('password')], 'Passwords must match')
+  co_password: Yup.string().oneOf([Yup.ref("password")], "Passwords must match"),
+  phoneNumber: Yup.string().required("Phone Number is required").length(10, "Phone Number must be 10 digits").optional(),
+
 });
 
 export default function Page() {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      co_password: "",
+      phoneNumber: "",
     },
     onSubmit: (values) => {
         console.log(values);
@@ -90,28 +85,45 @@ export default function Page() {
           </div>
           <div className="group">
             <Input
-              type={passwordVisible ? "text" : "password"}
+              type="text"
+              placeholder="Phone Number"
+              className="w-full h-full"
+              name="phoneNumber"
+              value={formik.values.phoneNumber}
+              onChange={formik.handleChange}
+            />
+          </div>
+          <div className="group">
+            <Input
+              type="password"
               className="w-full h-full"
               placeholder="Password"
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
             />
-            <span id="showPassword" onClick={togglePasswordVisibility}>
-              {passwordVisible ? <FaEye /> : <FaEyeSlash />}
-            </span>
+          </div>
+          <div className="group">
+            <Input
+              type="password"
+              className="w-full h-full"
+              placeholder="Password Confirm"
+              name="co_password"
+              value={formik.values.co_password}
+              onChange={formik.handleChange}
+            />
           </div>
         </form>
         <div className="text-sm flex justify-end mb-7 text-red-500">
           <a href="">Forgot Password?</a>
         </div>
         <div className="signIn">
-          <Button className="justify-center" type="submit" onClick={() => formik.handleSubmit()} title="Sign In" />
+          <Button className="justify-center" type="submit" onClick={() => formik.handleSubmit()} title="Sign Up" />
         </div>
         <div className="text-sm">
-          <span>Not a member?</span>
-          <Link className="underline text-blue-400 ml-2" href={ROUTES.register}>
-            Register now
+          <span>You are a member?</span> 
+          <Link className="underline text-blue-400 ml-2" href={ROUTES.login}>
+            Login
           </Link>
         </div>
       </div>
