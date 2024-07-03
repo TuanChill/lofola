@@ -1,0 +1,41 @@
+.login {
+  @apply bg-gray-200 w-96 text-center border-2 border-white rounded-2xl p-12 mx-2 shadow-xl relative;
+}
+
+.login .title {
+  @apply text-3xl font-bold mb-5;
+}
+
+.login .des {
+  @apply mb-5;
+}
+
+.login .group {
+  @apply bg-white rounded-xl h-12 mb-5 flex justify-center items-center relative;
+}
+
+.login .group input {
+  @apply w-full h-full border-none bg-transparent p-4 outline-none;
+}
+
+.login .group span {
+  @apply text-gray-500 rounded-r flex items-center px-3 cursor-pointer absolute right-0 ;
+}
+
+.login .group span ion-icon:nth-child(2) {
+  @apply hidden;
+}
+
+
+.login .signIn button {
+  @apply bg-red-500 w-full rounded-xl h-12 border-none shadow-lg mb-10 transition-all duration-500 text-white;
+}
+
+.login .signIn button:active {
+  @apply shadow-none transform translate-y-1;
+}
+
+.wrapper {
+  @apply text-center bg-cover min-h-screen m-0 flex justify-center items-center w-full;
+  background-image: url("../../../assets/images/bg-auth.jpg");
+}
